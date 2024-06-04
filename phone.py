@@ -95,9 +95,9 @@ def copy_data(file_name, file_name2):
     
     if row_number <= len(data):
         row_to_copy = data[row_number - 1]
-        data_new = read_file(file_name2)
-        data_new.append(row_to_copy)
-        standart_write(file_name2, data_new) 
+        res = read_file(file_name2)
+        res.append(row_to_copy)
+        standart_write(file_name2, res)
         print('Строка успешно скопирована')
     else:
         print('Введен неверный номер строки')

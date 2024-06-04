@@ -86,7 +86,7 @@ def main():
             if not exists(file_name):
                 print('Файл отсутсвует, пожалуйста создайте файл')
             copy_data(file_name, file_name2)
-            remove_row(file_name)
+        
 
 file_name2 = 'phone2.csv'
 def copy_data(file_name, file_name2):
@@ -95,10 +95,18 @@ def copy_data(file_name, file_name2):
     
     if row_number <= len(data):
         row_to_copy = data[row_number - 1]
-        standart_write(file_name2, [row_to_copy])
+        #standart_write(file_name2, [row_to_copy]) # перезаписывает файл
+        append_row(file_name2, row_to_copy) # дописывает файл согласно заданию
         print('Строка успешно скопирована')
     else:
         print('Введен неверный номер строки')
-
+        
+        
+def append_row(file_name, row):
+    with open(file_name, 'a', encoding='utf-8', newline='') as data:
+        f_w = DictWriter(data, fieldnames=['first_name', 'second_name', 'phone_number'])
+        if data.tell() == 0:
+            f_w.writeheader()
+        f_w.writerow(row)
 
 main()
